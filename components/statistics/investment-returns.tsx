@@ -4,8 +4,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import ProgressBar from "../progress-bar"
+import ProgressBar from "../common/progress-bar"
 import { cn } from "@/lib/utils"
+import { ScrollArea, ScrollBar } from "../ui/scroll-area"
 
 function InvestmentReturns() {
 
@@ -71,34 +72,37 @@ function InvestmentReturns() {
                     <CardTitle className='text-sm font-semibold'>Investment Returns</CardTitle>
                 </CardHeader>
                 <CardContent className='text-xs font-normal space-y-1.5 p-0'>
-                    <div className="grid grid-cols-2">
-                        <div className="pe-5 space-y-2">
-                            <h1 className="leading-5 font-semibold">Long Term</h1>
+                    <ScrollArea className="whitespace-nowrap w-full">
+                        <div className="grid grid-cols-2 min-w-4xl mb-2.5 xl:mb-0">
+                            <div className="pe-5 space-y-2">
+                                <h1 className="leading-5 font-semibold">Long Term</h1>
 
-                            {longTermReturns.map((term, index) => (
-                                <div className="flex justify-between items-center gap-x-3" key={`long-term-returns-${index}-${term.label}`}>
-                                    <div className="w-1/8" >{term.label}</div>
-                                    <div className="w-full">
-                                        <ProgressBar value={term.returns} className="h-2" />
+                                {longTermReturns.map((term, index) => (
+                                    <div className="flex justify-between items-center gap-x-3" key={`long-term-returns-${index}-${term.label}`}>
+                                        <div className="w-1/8" >{term.label}</div>
+                                        <div className="w-full">
+                                            <ProgressBar className="h-2" />
+                                        </div>
+                                        <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
                                     </div>
-                                    <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
 
-                        <div className="border-l ps-5 space-y-2">
-                            <h1 className="leading-5 font-semibold">Short Term</h1>
-                            {shortTermReturns.map((term, index) => (
-                                <div className="flex justify-between items-center gap-x-3" key={`short-term-returns-${index}-${term.label}`}>
-                                    <div className="w-1/8" >{term.label}</div>
-                                    <div className="w-full">
-                                        <ProgressBar value={term.returns} className="h-2" />
+                            <div className="border-l ps-5 space-y-2">
+                                <h1 className="leading-5 font-semibold">Short Term</h1>
+                                {shortTermReturns.map((term, index) => (
+                                    <div className="flex justify-between items-center gap-x-3" key={`short-term-returns-${index}-${term.label}`}>
+                                        <div className="w-1/8" >{term.label}</div>
+                                        <div className="w-full">
+                                            <ProgressBar className="h-2" />
+                                        </div>
+                                        <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
                                     </div>
-                                    <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                        <ScrollBar orientation="horizontal" className="h-2" />
+                    </ScrollArea>
                 </CardContent>
             </Card>
         </div>
