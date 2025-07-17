@@ -77,28 +77,37 @@ function InvestmentReturns() {
                             <div className="pe-5 space-y-2">
                                 <h1 className="leading-5 font-semibold">Long Term</h1>
 
-                                {longTermReturns.map((term, index) => (
-                                    <div className="flex justify-between items-center gap-x-3" key={`long-term-returns-${index}-${term.label}`}>
-                                        <div className="w-1/8" >{term.label}</div>
-                                        <div className="w-full">
-                                            <ProgressBar className="h-2" />
+                                {longTermReturns.map((term, index) => {
+                                    const up = Math.sign(term.returns) == 1 ? term.returns : 0
+                                    const down = Math.sign(term.returns) == -1 ? Math.abs(term.returns) : 0
+                                    return (
+                                        <div className="flex justify-between items-center gap-x-3" key={`long-term-returns-${index}-${term.label}`}>
+                                            <div className="w-1/8" >{term.label}</div>
+                                            <div className="w-full">
+                                                <ProgressBar className="h-2" up={up} down={down} />
+                                            </div>
+                                            <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
                                         </div>
-                                        <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
-                                    </div>
-                                ))}
+                                    )
+                                }
+                                )}
                             </div>
 
                             <div className="border-l ps-5 space-y-2">
                                 <h1 className="leading-5 font-semibold">Short Term</h1>
-                                {shortTermReturns.map((term, index) => (
-                                    <div className="flex justify-between items-center gap-x-3" key={`short-term-returns-${index}-${term.label}`}>
-                                        <div className="w-1/8" >{term.label}</div>
-                                        <div className="w-full">
-                                            <ProgressBar className="h-2" />
+                                {shortTermReturns.map((term, index) => {
+                                    const up = Math.sign(term.returns) == 1 ? term.returns : 0
+                                    const down = Math.sign(term.returns) == -1 ? Math.abs(term.returns) : 0
+                                    return (
+                                        <div className="flex justify-between items-center gap-x-3" key={`short-term-returns-${index}-${term.label}`}>
+                                            <div className="w-1/8" >{term.label}</div>
+                                            <div className="w-full">
+                                                <ProgressBar className="h-2" up={up} down={down} />
+                                            </div>
+                                            <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
                                         </div>
-                                        <div className={cn("w-1/8 text-end ", Math.sign(term.returns) == 1 ? 'text-theme-green' : 'text-theme-red')}>{term.returns}%</div>
-                                    </div>
-                                ))}
+                                    )
+                                })}
                             </div>
                         </div>
                         <ScrollBar orientation="horizontal" className="h-2" />

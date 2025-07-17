@@ -27,7 +27,7 @@ function HighLowStatistics() {
                 <Skeleton className="h-8 w-1/3" />
                 <div className='grid grid-cols-4 gap-x-5'>
                     {size.map((_, key: number) => (
-                        <SkeletonBox key={`overview-skeleton-grid-${key}`} className='rounded-lg min-w-xs w-full h-32' />
+                        <SkeletonBox key={`overview-skeleton-grid-${key}`} className='rounded-lg max-w-xs w-full h-32' />
                     ))}
                 </div>
             </div>

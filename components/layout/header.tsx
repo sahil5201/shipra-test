@@ -54,11 +54,12 @@ function Header() {
         } = data.result
         const formattedDate = format(new Date(nextEarningsDate), 'MMMM d, yyyy');
 
-        const scroll = (offset: number) => {
-            console.log('offset', offset)
-            if (viewportRef.current) {
-                console.log(viewportRef.current)
-                viewportRef.current.scrollLeft += offset
+        function scroll(value: number) {
+            const scrollArea = viewportRef.current?.querySelector(
+                '[data-radix-scroll-area-viewport]'
+            )
+            if (scrollArea) {
+                scrollArea.scrollLeft = scrollArea.scrollLeft += value
             }
         }
 
